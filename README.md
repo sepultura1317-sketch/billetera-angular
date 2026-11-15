@@ -45,7 +45,7 @@ billetera-angular/
 
 1. **Clonar el repositorio e ingresar a la carpeta del proyecto:**
    ```bash
-   git clone <URL_DEL_REPOSITORIO_CASO_2>
+   git clone https://github.com/sepultura1317-sketch/billetera-angular.git
    cd billetera-angular
    ```
 
