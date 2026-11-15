@@ -1,0 +1,49 @@
+<div class="card border-dark border-opacity-25 shadow-sm h-100 bg-white">
+  <div class="card-header header-upn-yellow d-flex justify-content-between align-items-center py-3">
+    <span class="fw-bold">NuevoMovimientoComponent</span>
+    <span class="badge bg-dark text-warning fw-bold">HIJO</span>
+  </div>
+  <div class="card-body">
+    <div class="mb-3">
+      <label class="form-label fw-semibold text-dark">Tipo de movimiento</label>
+      <select class="form-select border-dark border-opacity-25" [(ngModel)]="tipo" name="tipo">
+        <option value="Recarga">Recarga</option>
+        <option value="Gasto">Gasto</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-semibold text-dark">Monto (S/)</label>
+      <input type="number" step="0.01" class="form-control border-dark border-opacity-25"
+             [(ngModel)]="monto" name="monto" placeholder="0.00">
+    </div>
+    
+   @if (monto === null) {
+  <div class="alert alert-danger border-2 border-danger py-2">
+    <span class="fw-semibold">Ingrese un monto mayor que cero.</span>
+  </div>
+}
+ 
+@if (monto !== null && monto <= 0) {
+  <div class="alert alert-danger border-2 border-danger py-2">
+    <span class="fw-semibold">El monto debe ser mayor que cero.</span>
+  </div>
+}
+    @if (esGastoExcesivo) {
+      <div class="alert alert-danger border-2 border-danger py-2 d-flex justify-content-between align-items-center">
+        <span class="fw-semibold">Saldo insuficiente para realizar el gasto</span>
+        <span class="badge bg-danger text-white">&#64;if</span>
+      </div>
+    }
+
+    <button type="button" class="btn btn-dark text-warning fw-bold w-100 mt-2 py-2 border border-warning"
+            [disabled]="formularioInvalido"
+            (click)="registrar()">
+      Registrar movimiento
+    </button>
+
+    <p class="text-muted small text-center mt-3 mb-0">
+      <code class="text-dark fw-semibold">[disabled]</code> &rarr; no se emite un gasto inválido
+    </p>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+:root {
+  --upn-yellow: #FDB913;
+  --upn-black: #111111;
+}
+
+.navbar-upn {
+  background-color: var(--upn-black);
+  border-bottom: 4px solid var(--upn-yellow);
+}
+
+.header-upn-yellow {
+  background-color: var(--upn-yellow) !important;
+  color: var(--upn-black) !important;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--upn-yellow);
+  box-shadow: 0 0 0 0.25rem rgba(253, 185, 19, 0.35);
+}

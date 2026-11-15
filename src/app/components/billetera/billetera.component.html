@@ -1,0 +1,64 @@
+<div class="container py-4">
+  <div class="row g-4">
+    <!-- Panel Padre: Estado e Historial -->
+    <div class="col-md-6">
+      <div class="card border-dark border-opacity-25 shadow-sm h-100 bg-white">
+        <div class="card-header bg-dark text-warning d-flex justify-content-between align-items-center py-3">
+          <span class="fw-bold">BilleteraComponent</span>
+          <span class="badge bg-warning text-dark fw-bold">PADRE</span>
+        </div>
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <p class="text-secondary text-uppercase fw-semibold small mb-1">Saldo disponible</p>
+              <h2 class="display-5 fw-bold text-dark mb-4">
+                <span class="badge bg-warning text-dark me-2">S/</span>{{ saldo | number:'1.2-2' }}
+              </h2>
+            </div>
+            <span class="badge bg-dark text-warning">Interpolación</span>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold text-dark mb-0">Movimientos</h5>
+            <span class="badge bg-warning text-dark border border-dark">&#64;for</span>
+          </div>
+
+          @if (movimientos.length === 0) {
+            <div class="alert alert-light border border-dark border-opacity-25 text-muted text-center">
+              Aún no hay movimientos
+            </div>
+          } @else {
+            <div class="d-flex flex-column gap-2">
+              @for (mov of movimientos; track $index) {
+                <div class="border border-dark border-opacity-25 rounded p-3 d-flex justify-content-between align-items-center bg-light">
+                  <span class="badge rounded-pill px-3 py-2 fw-bold"
+                        [ngClass]="mov.tipo === 'Recarga' ? 'bg-warning text-dark border border-dark' : 'bg-dark text-warning'">
+                    {{ mov.tipo }}
+                  </span>
+                  <span class="fw-bold"
+                        [ngClass]="mov.tipo === 'Recarga' ? 'text-dark' : 'text-danger'">
+                    {{ mov.tipo === 'Recarga' ? '+' : '-' }} S/ {{ mov.monto | number:'1.2-2' }}
+                  </span>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel Hijo: Formulario y Validación -->
+    <div class="col-md-6">
+      <app-nuevo-movimiento
+        [saldo]="saldo"
+        (movimientoValido)="procesarNuevoMovimiento($event)" />
+    </div>
+  </div>
+
+  <div class="card bg-dark text-white border-warning border-2 mt-4 shadow-sm">
+    <div class="card-body py-2 px-3 d-flex flex-wrap justify-content-between align-items-center small">
+      <span class="fw-bold text-warning">EL PADRE ES DUEÑO DEL ESTADO</span>
+      <span class="text-light">El hijo solo valida y notifica una solicitud válida mediante <code class="text-warning">input()</code> y <code class="text-warning">output()</code>.</span>
+    </div>
+  </div>
+</div>
